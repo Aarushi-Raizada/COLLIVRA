@@ -1,0 +1,73 @@
+/**
+ * COLLIVRA Canonical Clohessy-Wiltshire (CW) Rendezvous Benchmark Fixture
+ *
+ * Source: data/fixtures/cw_rendezvous_canonical_scenario.json
+ * Derived by: COLLIVRA packages/simulation/simulation/rendezvous.py (solve_two_impulse_cw)
+ *
+ * Physics & Astrodynamics Guardrails (AGENTS.md):
+ * - Pure Active Debris Removal (ADR) rendezvous benchmark in near-circular LEO.
+ * - Near-circular chief orbit precondition: r = 7200 km, e ≈ 0.000028 <= 0.005.
+ * - Does NOT represent a collision breakup; contains zero colliding parent spacecraft
+ *   and no debris fragmentation cloud.
+ */
+
+export const CANONICAL_CW_FIXTURE = {
+  $schema: "https://json-schema.org/draft/2020-12/schema",
+  fixture_name: "canonical_cw_rendezvous_scenario",
+  provenance: {
+    description: "Canonical Clohessy-Wiltshire rendezvous scenario shared across frontend and backend regression test suites.",
+    derived_by: "ZORBIT packages/simulation/simulation/rendezvous.py (solve_two_impulse_cw)",
+    source_files: [
+      "packages/simulation/simulation/rendezvous.py",
+      "packages/simulation/simulation/constants.py",
+    ],
+    is_live_integration: false,
+    verification_type: "shared_fixture_contract_test",
+  },
+  chief_orbit: {
+    chief_gcrs_position_km: [7200.012, 0.020888, 0.005072] as [number, number, number],
+    chief_gcrs_velocity_kms: [0.0001, 7.4404, 0.0005] as [number, number, number],
+    semi_major_axis_km: 7199.813308893886,
+    mean_motion_rad_s: 0.0010334442063453571,
+    mu_earth_km3_s2: 398600.4418,
+  },
+  chaser_state: {
+    chaser_gcrs_position_km: [7200.0, 0.1, 0.0] as [number, number, number],
+    chaser_gcrs_velocity_kms: [0.0, 7.4405, 0.0] as [number, number, number],
+  },
+  rendezvous_parameters: {
+    targeting_mode: "STANDOFF_HOLD" as const,
+    standoff_distance_m: 50.0,
+    transfer_time_s: 120.0,
+  },
+  relative_states_hill_frame: {
+    description: "Hill / RIC relative frame: [0] = Radial (R), [1] = In-Track (I), [2] = Cross-Track (C)",
+    initial_position_km: [-0.01199977406027933, 0.07911169379304712, -0.005077307917645515],
+    initial_position_m: [-11.99977406027933, 79.11169379304712, -5.0773079176455145],
+    initial_velocity_kms: [-1.8247052837962656e-05, 0.0001123671020937974, -0.0005000066485139137],
+    initial_velocity_ms: [-0.018247052837962657, 0.1123671020937974, -0.5000066485139136],
+    terminal_position_km: [0.0, -0.05, 0.0],
+    terminal_position_m: [0.0, -50.0, 0.0],
+    terminal_velocity_kms: [0.0, 0.0, 0.0],
+    terminal_velocity_ms: [0.0, 0.0, 0.0],
+  },
+  display_space_threejs: {
+    description: "Three.js local display space: [0] = In-Track (X=I, meters), [1] = Radial (Y=R, meters), [2] = Cross-Track (Z=C, meters)",
+    initial_position_m: [79.11169379304712, -11.99977406027933, -5.0773079176455145],
+    terminal_position_m: [-50.0, 0.0, 0.0],
+    post_burn_1_velocity_ms: [-1.0579862098666089, 0.2339374851063226, 0.042093772597512215],
+  },
+  solver_reference_solution: {
+    burn_1_dv_cw_ms: [0.25218453794428525, -1.1703533119604062, 0.5421004211114259] as [number, number, number],
+    burn_2_dv_cw_ms: [0.03419763332848412, 1.0827884038267068, -0.04241954622053785] as [number, number, number],
+    total_delta_v_ms: 2.398387074731806,
+    post_burn_1_velocity_hill_ms: [0.2339374851063226, -1.0579862098666089, 0.042093772597512215] as [number, number, number],
+    post_burn_1_velocity_display_ms: [-1.0579862098666089, 0.2339374851063226, 0.042093772597512215] as [number, number, number],
+    is_mathematically_solvable: true,
+    is_budget_feasible: true,
+    is_feasible: true,
+    terminal_position_error_m: 0.0,
+    terminal_velocity_error_ms: 0.0,
+  },
+};
+

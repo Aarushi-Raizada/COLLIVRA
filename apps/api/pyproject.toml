@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "zorbit_api"
+version = "0.1.0"
+description = "FastAPI backend application for COLLIVRA Space Situational Awareness & Orbital Sustainability Platform"
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [{ name = "Member 2 - Backend & Orbital Mechanics Lead" }]
+dependencies = [
+    "fastapi>=0.111.0",
+    "uvicorn[standard]>=0.30.0",
+    "pydantic>=2.7.0",
+    "pydantic-settings>=2.2.0",
+    "orbital_core>=0.1.0",
+    "simulation>=0.1.0",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["zorbit_api*"]
