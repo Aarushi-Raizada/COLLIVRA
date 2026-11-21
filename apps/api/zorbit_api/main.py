@@ -53,6 +53,7 @@ def create_app() -> FastAPI:
     origins = [
         "http://localhost:3000",
         "http://127.0.0.1:3000",
+        "https://collivra-one.vercel.app",
     ]
 
     app.add_middleware(
